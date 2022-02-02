@@ -5,6 +5,7 @@ from .models import Group, Post
 
 POSTS_LIMIT = 10
 
+
 def index(request):
     posts = Post.objects.order_by('-pub_date')[:POSTS_LIMIT]
     # В словаре context отправляем информацию в шаблон
@@ -17,7 +18,8 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:POSTS_LIMIT]
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[
+        :POSTS_LIMIT]
     context = {
         'group': group,
         'posts': posts,
